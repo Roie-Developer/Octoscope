@@ -5,15 +5,11 @@ import json
     The method takes in a csv file path and output data into a json file path'''
 
 class ParsingToJson():
-    count = True
     def __init__(self, file_csv_name : csv, file_json_name : json):
-        print(f"This is file_json_name type: {file_json_name}")
-        if self.count:
             self.json_data = {"names": []}
             self.json_test_result = {"results": []}
             self.file_csv_name = file_csv_name
             self.file_json_name = file_json_name
-            self.count = False
 
     def parse(self):
         with open(self.file_csv_name, "r") as csv_file:
@@ -26,7 +22,7 @@ class ParsingToJson():
                         if row.__contains__(":"):
                             st1 = row.split(":", 1)
                             self.json_data["names"].append({st1[0]: st1[1]})
-                            print(self.json_data)
+                            # print(self.json_data)
                         else:
                             st2 = row.split("(", 1)
                             self.json_data["names"].append({st2[0]: "(" + st2[1]})
@@ -37,8 +33,9 @@ class ParsingToJson():
                                 self.json_test_result["results"].append({name: []})
                         else:
                             pos = 0
+                            print(f"writing data : {name_list}")
                             for name in name_list:
-                                print(f"Here is json_result[]")
+                                # print(f"This is the data location to where to append : { self.json_test_result['result'][name]}")
                                 self.json_test_result["result"][name].append(row[pos])
                                 pos += 1
                 except IndexError as e:

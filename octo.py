@@ -7,7 +7,7 @@ import argparse
 import requests
 import pandas
 import csv
-from test import ParsingToJson
+import test
 """ running parameters """
 
 try:
@@ -57,9 +57,10 @@ def run_profile(profile_name,data,counter):
 				print('Out  of profile loop')
 				break
 			# TODO: show progressbar according to testDuration? (is it the same as calculated duration?)
-			sys.stdout.write('In run_profile #1:\n . ')
-			sys.stdout.flush()
-			time.sleep(1)
+			# sys.stdout.write('In run_profile #1:\n . ')
+			# sys.stdout.flush()
+			print("Entering sleeping count in run_profile for 60s")
+			time.sleep(SLEEP_COUNT)
 		if test_done:
 			logging.info("{} - finished".format(profile_name))
 		else:
@@ -69,24 +70,16 @@ def run_profile(profile_name,data,counter):
 
 	logging.info("generating CSV of: {}".format(profile_name))
 	csv_url = octobox.throughputTest.getCSV(test_obj)[0]['href']
-	logging.info(f"\nThis is test throughput from running_profile \n {octobox.throughputTest.getCSV(test_obj)}")
+	# logging.info(f"\nThis is test throughput from running_profile \n {octobox.throughputTest.getCSV(test_obj)}")
 	os.makedirs(name=RESULTS_PATH, mode=755, exist_ok=True)
 	csv_path = os.path.join(RESULTS_PATH, profile_name + '_' + str(data.Channel[counter]) + '_' + str(data.STREAMS[counter]) + '_' + str(data.BANDWIDTH[counter]) + '_' + start_time + ".csv")
 	json_path = os.path.join(RESULTS_PATH, profile_name + '_' + str(data.Channel[counter]) + '_' + str(data.STREAMS[counter]) + '_' + str(data.BANDWIDTH[counter]) + '_' + start_time + ".json")
 	logging.info("saving CSV to {}".format(csv_path))
 	with open(csv_path, "w+", newline= "") as file:
 		file.write(requests.get(csv_url).text)
-		file.write("*****************************")
+		# file.write("*****************************")
 	created_csvs.append(csv_path)
-	with open(created_csvs[0], "r") as csv_file:
-		reader = csv.reader(csv_file)
-		for row in reader:
-			try:
-				json_data = dict(map(lambda r: r.split(":"), row))
-				logging.info(json_data)
-			except Exception as e:
-				logging.info(f"Error happened {e}")
-	parsing_data = ParsingToJson(csv_path,json_path)
+	parsing_data = test.ParsingToJson(csv_path,json_path)
 	parsing_data.parse()
 	logging.info("Parsing to json is finished")
 
@@ -118,11 +111,13 @@ def run(profiles, repeat=1):
 			run_profile(profile,data,profile_count)
 			if profile_count < len(profiles):
 				logging.info("Sleeping 60 seconds".format(SLEEP_COUNT))
-				for sleep_second in range(SLEEP_COUNT):
-					if sleep_second % 20 == 0:
-						sys.stdout.write('In octo run2:. \n')
-						sys.stdout.flush()
-					time.sleep(1)
+				logging.info(f"Sleeping started at {time.time()}")
+				# for sleep_second in range(SLEEP_COUNT):
+					# if sleep_second % 20 == 0:
+						# sys.stdout.write('In octo run2:. \n')
+						# sys.stdout.flush()
+				time.sleep(SLEEP_COUNT)
+				logging.info(f"Sleeping finished at {time.time()}")
 	logging.info("CSV files created:\n{}".format('\n'.join([csv for csv in created_csvs])))
 
 
