@@ -111,7 +111,7 @@ def run(profiles, repeat=1):
 			run_profile(profile,data,profile_count)
 			if profile_count < len(profiles):
 				logging.info("Sleeping 60 seconds".format(SLEEP_COUNT))
-				logging.info(f"Sleeping started at {time.time()}")
+				logging.info(f"Sleeping started {time.time()}")
 				# for sleep_second in range(SLEEP_COUNT):
 					# if sleep_second % 20 == 0:
 						# sys.stdout.write('In octo run2:. \n')
