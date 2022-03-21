@@ -78,11 +78,16 @@ def run_profile(profile_name,data,counter):
 		file.write(requests.get(csv_url).text)
 		# file.write("*****************************")
 	created_csvs.append(csv_path)
+	automation_parse(csv_path, json_path)
+
+
 	# Start - Added by Roie Turgeman
+def automation_parse(csv_path,json_path ):
 	parsing_data = test.ParsingToJson(csv_path,json_path)
-	parsing_data.parse()
-	logging.info("Parsing to json is finished")
-	# End
+	# parsing_data.parse()
+	# logging.info("Parsing to json is finished")
+	# parsing_data.start_html()
+
 
 def run(profiles, repeat=1):
 	os.makedirs(name=RESULTS_PATH, mode=755, exist_ok=True)

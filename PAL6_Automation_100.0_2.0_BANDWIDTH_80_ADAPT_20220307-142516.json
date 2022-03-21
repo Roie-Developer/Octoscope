@@ -1,0 +1,90 @@
+{
+    "test_results": [
+        {
+            "test_cases": [
+                {
+                    "log_link": "",
+                    "test_params": {
+                        "AP": {
+                            "Direction": "NA",
+                            "Protocol": "NA",
+                            "Channel Mode": "NA",
+                            "Regulatory Domain": "NA",
+                            "Mode": "NA",
+                            "Channel": "NA"
+                        }
+                    },
+                    "test_steps": [
+                        {
+                            "log_link": "",
+                            "time_started": "",
+                            "test_params": "",
+                            "grade": "NA",
+                            "test_type": "",
+                            "QCID": "NA",
+                            "measurement": {
+                                "Phy Rate Transmit Stat": "NA",
+                                "Aeroflex Channel": "NA",
+                                "PowerAntSelectionBwCp": "NA",
+                                "Cpu All": "NA",
+                                "RSSI RX3": "",
+                                "Power Selection": "NA",
+                                "PER": "NA",
+                                "Pass/Fail": "NA",
+                                "Variance Iteration": "NA",
+                                "TX Power [dbm]": "NA",
+                                "RX Threshold": "NA",
+                                "Forced Rate": "NA",
+                                "BF bitmap": "NA",
+                                "Network Protocol": "NA",
+                                "Number Of Antennas": "NA",
+                                "Phy Rate Receive Stat": "NA",
+                                "Traffic Direction": "NA",
+                                "Serial Number": "NA",
+                                "BF Mode": "NA",
+                                "Fix Power": "NA",
+                                "Open Loop Mode": "NA",
+                                "Remark": "NA",
+                                "Attenuation0": "",
+                                "Attenuation1": "",
+                                "Attenuation2": "",
+                                "Attenuation3": "",
+                                "STBC": "NA",
+                                "20/40Co-Existence": "NA",
+                                "MU MIMO": "NA",
+                                "RA Protection": "NA",
+                                "Throughput": "NA",
+                                "LDPC": "NA",
+                                "RA Index": "NA",
+                                "Test Protocol": "NA",
+                                "Colum Number": "NA",
+                                "EPM Measure Ant 2": "NA",
+                                "EPM Measure Ant 3": "NA",
+                                "EPM Measure Ant 0": "NA",
+                                "EPM Measure Ant 1": "NA",
+                                "TXOP AMPTU": "NA",
+                                "RSSI RX2": "NA",
+                                "RSSI RX1": "NA",
+                                "RSSI RX0": "NA",
+                                "Tcr0 Rf Power": "NA",
+                                "TXOP": "NA"
+                            },
+                            "time_ended": "",
+                            "time": "",
+                            "test_name": "",
+                            "test_comments": [],
+                            "test_description": ""
+                        }
+                    ]
+                }
+            ],
+            "test_comments": []
+        }
+    ],
+    "wcs_sta1_info": "NA",
+    "test_name": "MAC_Throughput",
+    "Setup_name": "TP3",
+    "DUT_platform": "",
+    "ID": "",
+    "DUT_Build_Version": ""
+}
