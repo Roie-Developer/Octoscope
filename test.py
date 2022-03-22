@@ -84,5 +84,6 @@ class ParsingToJson(object):
 
 
 
-# if __name__ == "__main__":
-#     ParsingToJson(file_csv_name_global, file_json_name_global)
+if __name__ == "__main__":
+    ParsingToJson(file_csv_name_global, file_json_name_global)
+    ParsingToJson(file_csv_name_global, file_json_name_global)
