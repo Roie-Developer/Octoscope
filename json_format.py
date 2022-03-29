@@ -29,26 +29,9 @@ class RequiredJsonFormat(object):
                                                      "test_comments": [], "test_description": ""}
 
         # All objects that are added should be inside this object - holds test indict_formation
-        self.measurement = {"Phy Rate Transmit Stat": "NA", "Aeroflex Channel": "NA",
-                            "PowerAntSelectionBwCp": "NA",
-                            "Cpu All": "NA", "RSSI RX3": "", "Power Selection": "NA", "PER": "NA", "Pass/Fail": "NA",
-                            "Variance Iteration": "NA",
-                            "TX Power [dbm]": "NA", "RX Threshold": "NA", "Forced Rate": "NA", "BF bitmap": "NA",
-                            "Network Protocol": "NA",
-                            "Number Of Antennas": "NA", "Phy Rate Receive Stat": "NA", "Traffic Direction": "NA",
-                            "Serial Number": "NA",
-                            "BF Mode": "NA", "Fix Power": "NA", "Open Loop Mode": "NA", "Remark": "NA",
-                            "Attenuation0": "",
-                            "Attenuation1": "",
-                            "Attenuation2": "", "Attenuation3": "", "STBC": "NA", "20/40Co-Existence": "NA",
-                            "MU MIMO": "NA",
-                            "RA Protection": "NA",
-                            "Throughput": "NA", "LDPC": "NA", "RA Index": "NA", "Test Protocol": "NA",
-                            "Colum Number": "NA",
-                            "EPM Measure Ant 2": "NA",
-                            "EPM Measure Ant 3": "NA", "EPM Measure Ant 0": "NA", "EPM Measure Ant 1": "NA",
-                            "TXOP AMPTU": "NA",
-                            "RSSI RX2": "NA", "RSSI RX1": "NA", "RSSI RX0": "NA", "Tcr0 Rf Power": "NA", "TXOP": "NA"}
+        self.measurement = { "Attenuation0": "","Throughput": "",}
+
+        self.append_measurements = None
 
         self.dict_name_variable = [self.start, self.start_testResult, self.start_testResult_testCases,
                                    self.start_testResult_testCases_testParams,
@@ -71,6 +54,7 @@ class RequiredJsonFormat(object):
             lis_1.get("AP").update(self.start_testResult_testCases_testParams_AP)
             lis_2 = lis.get("test_steps")
             lis_2.append(self.start_testResult_testCases_testSteps)
+            self.append_measurements = lis_2
             [lis_2] = lis_2
             lis_2.get("measurement").update(self.measurement)
             print("formatting is done")
@@ -82,3 +66,11 @@ class RequiredJsonFormat(object):
             print("!!!!!! ValueError !!!!!!!")
             return dict_format
         return None
+
+
+    def adding_measurement(self,row_measurement):
+        print(row_measurement)
+
+
+
+
