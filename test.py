@@ -36,7 +36,6 @@ class ParsingToJson(object):
 
     # Adding the data to the measurements section
     def add_test_data(self, json_obj):
-        cnt = 0
         found = False
         with open(self.file_csv_name, "r") as csv_file:
             reader = csv.reader(csv_file)
@@ -45,8 +44,8 @@ class ParsingToJson(object):
                     if row == list():
                         pass
                     elif found:
-                        json_obj.adding_measurement(row)
-                    elif row[0] == "# RvR Data" or found:
+                        json_obj.adding_test_results(row)
+                    elif row[0] == "Step Index" or found:
                         found = True
             except Exception as e:
                 print(f"Error was found {e.__str__()}")

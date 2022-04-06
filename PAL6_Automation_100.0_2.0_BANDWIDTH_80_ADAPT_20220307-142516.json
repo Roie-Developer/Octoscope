@@ -24,7 +24,8 @@
                             "QCID": "NA",
                             "measurement": {
                                 "Attenuation0": "",
-                                "Throughput": ""
+                                "Throughput": "",
+                                "Degree": "NA"
                             },
                             "time_ended": "",
                             "time": "",
