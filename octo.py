@@ -6,7 +6,7 @@ import logging
 import argparse
 import requests
 import pandas
-import test
+import json_controller
 
 """ running parameters """
 
@@ -24,6 +24,7 @@ PROFILE_MAX_DURATION = 2 * 7000  # sec
 SLEEP_COUNT = 10
 
 created_csvs = []
+# Added by Roie Turgeman - next line
 created_json = set()
 
 """ setup parameters """
@@ -50,7 +51,6 @@ def run_profile(profile_name, data, counter):
     if read_response is not None:
         raise ValueError(read_response[0]["message"])
     logging.debug("test_obj: {}".format(test_obj))
-
     try:
         octobox.throughputTest.start(test_obj['id'])
         for check_is_running_count in range(PROFILE_MAX_DURATION):
@@ -70,7 +70,6 @@ def run_profile(profile_name, data, counter):
             raise RuntimeError("{} has exceeded {} seconds!".format(profile_name, PROFILE_MAX_DURATION))
     except:
         raise RuntimeError("Exception while profile {} is running".format(profile_name))
-
     logging.info("generating CSV of: {}".format(profile_name))
     csv_url = octobox.throughputTest.getCSV(test_obj)[0]['href']
     # logging.info(f"\nThis is test throughput from running_profile \n {octobox.throughputTest.getCSV(test_obj)}")
@@ -83,12 +82,12 @@ def run_profile(profile_name, data, counter):
     with open(csv_path, "w+", newline="") as file:
         file.write(requests.get(csv_url).text)
     created_csvs.append(csv_path)
-    automation_parse(csv_path, json_path)
+    automation_parse(csv_path, json_path, data, counter)
 
 
 # Start - Added by Roie Turgeman
-def automation_parse(csv_path, json_path):
-    parsing_data = test.ParsingToJson(csv_path, json_path)
+def automation_parse(csv_path, json_path, user_csv_input_data, csv_row_counter):
+    json_controller.ParsingToJson(csv_path, json_path, user_csv_input_data, csv_row_counter)
 
 
 def run(profiles, repeat=1):
@@ -131,6 +130,7 @@ def run(profiles, repeat=1):
 
 def get_parser(parser=argparse.ArgumentParser(prog='octo')):
     # TODO: find profiles' location (might need another script)
+    logging.info(dir(parser))
     parser.description = "octo.py script arguments"
     parser.formatter_class = argparse.RawTextHelpFormatter
     parser.add_argument("profiles", nargs='+', help="profile(s) to execute separated by \',\'")
@@ -201,7 +201,6 @@ def Pal5_Config(index, data):
     radiosetup_url = UNSET
     radiostatus_url = UNSET
     status_url = UNSET
-
     REST_TIMEOUT = 30
 
     def checkResponse(resp):

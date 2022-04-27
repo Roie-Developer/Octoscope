@@ -1,0 +1,109 @@
+{
+    "test_results": [
+        {
+            "test_cases": [
+                {
+                    "log_link": "Testing_Purposes\\PAL6_Automation_100.0_2.0_BANDWIDTH_80_ADAPT_20220424-110148.json",
+                    "test_params": {
+                        "AP": {
+                            "Direction": "NA",
+                            "Protocol": "NA",
+                            "Channel Mode": "NA",
+                            "Regulatory Domain": "NA",
+                            "Mode": [
+                                "8",
+                                "0"
+                            ],
+                            "Channel": 100
+                        },
+                        "test_type": "MAC_RVR"
+                    },
+                    "test_steps": [
+                        {
+                            "log_link": "NA",
+                            "time_started": "NA",
+                            "test_params": "NA",
+                            "grade": "NA",
+                            "test_type": "MAC_RVR",
+                            "QCID": "NA",
+                            "measurement": {
+                                "Attenuation0": "0",
+                                "Throughput": "534.149",
+                                "Degree": "#N/A"
+                            },
+                            "time_ended": "NA",
+                            "time": "NA",
+                            "test_name": "MAC_RVR",
+                            "test_comments": [],
+                            "test_description": "NA"
+                        },
+                        {
+                            "log_link": "NA",
+                            "time_started": "NA",
+                            "test_params": "NA",
+                            "grade": "NA",
+                            "test_type": "MAC_RVR",
+                            "QCID": "NA",
+                            "measurement": {
+                                "Attenuation0": "-3",
+                                "Throughput": "512.462",
+                                "Degree": "#N/A"
+                            },
+                            "time_ended": "NA",
+                            "time": "NA",
+                            "test_name": "MAC_RVR",
+                            "test_comments": [],
+                            "test_description": "NA"
+                        },
+                        {
+                            "log_link": "NA",
+                            "time_started": "NA",
+                            "test_params": "NA",
+                            "grade": "NA",
+                            "test_type": "MAC_RVR",
+                            "QCID": "NA",
+                            "measurement": {
+                                "Attenuation0": "-6",
+                                "Throughput": "393.168",
+                                "Degree": "#N/A"
+                            },
+                            "time_ended": "NA",
+                            "time": "NA",
+                            "test_name": "MAC_RVR",
+                            "test_comments": [],
+                            "test_description": "NA"
+                        },
+                        {
+                            "log_link": "NA",
+                            "time_started": "NA",
+                            "test_params": "NA",
+                            "grade": "NA",
+                            "test_type": "MAC_RVR",
+                            "QCID": "NA",
+                            "measurement": {
+                                "Attenuation0": "-9",
+                                "Throughput": "380.805",
+                                "Degree": "#N/A"
+                            },
+                            "time_ended": "NA",
+                            "time": "NA",
+                            "test_name": "MAC_RVR",
+                            "test_comments": [],
+                            "test_description": "NA"
+                        }
+                    ],
+                    "test_type": "MAC_RVR"
+                }
+            ],
+            "test_comments": [],
+            "test_type": "MAC_RVR"
+        }
+    ],
+    "wcs_sta1_info": "PAL6",
+    "test_name": "PAL6_Automation",
+    "Setup_name": "Octoscope",
+    "DUT_platform": "NA",
+    "ID": "27042022110401_Octoscope",
+    "DUT_Build_Version": "NA",
+    "test_type": "MAC_RVR"
+}
