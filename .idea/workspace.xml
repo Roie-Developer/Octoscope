@@ -2,10 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0c5bac1-3a7f-4ca3-a9a9-80fcb38aaa02" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/octo-home.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RESTful API/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RESTful API/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RESTful API/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RESTful API/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RESTful API/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RESTful API/app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.~lock.Octoscope_Configuration.xlsx#" beforeDir="false" afterPath="$PROJECT_DIR$/.~lock.Octoscope_Configuration.xlsx#" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Octoscope_Configuration.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Octoscope_Configuration.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/json_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/json_controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/json_format_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/json_format_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/octo.py" beforeDir="false" afterPath="$PROJECT_DIR$/octo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/octobox.py" beforeDir="false" afterPath="$PROJECT_DIR$/octobox.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,7 +34,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.octo">
     <configuration name="octo" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Octoscope_New" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -36,7 +45,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/octo.py" />
-      <option name="PARAMETERS" value="PAL6_Exp PAL6_Exp" />
+      <option name="PARAMETERS" value="PAL6_Automation PAL6_Automation-2" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -65,8 +74,13 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.octo" />
+      </list>
+    </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -81,61 +95,57 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="526" y="170" width="424" height="584" key="#com.intellij.ide.macro.MacrosDialog" timestamp="1645034200953">
+    <state x="422" y="79" width="546" height="651" key="#octo" timestamp="1653911940913">
       <screen x="57" y="27" width="1383" height="873" />
     </state>
-    <state x="526" y="170" width="424" height="584" key="#com.intellij.ide.macro.MacrosDialog/57.27.1383.873@57.27.1383.873" timestamp="1645034200953" />
-    <state x="422" y="79" width="642" height="766" key="#octo" timestamp="1645079440486">
+    <state x="422" y="79" width="642" height="766" key="#octo/57.27.1383.873@57.27.1383.873" timestamp="1653911940913" />
+    <state x="312" y="71" width="546" height="651" key="#octo/57.27.967.741@57.27.967.741" timestamp="1652027764782" />
+    <state width="1360" height="272" key="GridCell.Tab.0.bottom" timestamp="1653822237141">
       <screen x="57" y="27" width="1383" height="873" />
     </state>
-    <state x="422" y="79" width="642" height="766" key="#octo/57.27.1383.873@57.27.1383.873" timestamp="1645079440486" />
-    <state x="531" y="220" width="424" height="484" key="FileChooserDialogImpl" timestamp="1645033268189">
+    <state width="1360" height="272" key="GridCell.Tab.0.bottom/57.27.1383.873@57.27.1383.873" timestamp="1653822237141" />
+    <state width="1360" height="272" key="GridCell.Tab.0.center" timestamp="1653822237140">
       <screen x="57" y="27" width="1383" height="873" />
     </state>
-    <state x="531" y="220" width="424" height="484" key="FileChooserDialogImpl/57.27.1383.873@57.27.1383.873" timestamp="1645033268189" />
-    <state width="1360" height="272" key="GridCell.Tab.0.bottom" timestamp="1645006105829">
+    <state width="1360" height="272" key="GridCell.Tab.0.center/57.27.1383.873@57.27.1383.873" timestamp="1653822237140" />
+    <state width="1360" height="272" key="GridCell.Tab.0.left" timestamp="1653822237140">
       <screen x="57" y="27" width="1383" height="873" />
     </state>
-    <state width="1360" height="272" key="GridCell.Tab.0.bottom/57.27.1383.873@57.27.1383.873" timestamp="1645006105829" />
-    <state width="1360" height="272" key="GridCell.Tab.0.center" timestamp="1645006105828">
+    <state width="1360" height="272" key="GridCell.Tab.0.left/57.27.1383.873@57.27.1383.873" timestamp="1653822237140" />
+    <state width="1360" height="272" key="GridCell.Tab.0.right" timestamp="1653822237141">
       <screen x="57" y="27" width="1383" height="873" />
     </state>
-    <state width="1360" height="272" key="GridCell.Tab.0.center/57.27.1383.873@57.27.1383.873" timestamp="1645006105828" />
-    <state width="1360" height="272" key="GridCell.Tab.0.left" timestamp="1645006105828">
+    <state width="1360" height="272" key="GridCell.Tab.0.right/57.27.1383.873@57.27.1383.873" timestamp="1653822237141" />
+    <state width="1360" height="272" key="GridCell.Tab.1.bottom" timestamp="1653822237142">
       <screen x="57" y="27" width="1383" height="873" />
     </state>
-    <state width="1360" height="272" key="GridCell.Tab.0.left/57.27.1383.873@57.27.1383.873" timestamp="1645006105828" />
-    <state width="1360" height="272" key="GridCell.Tab.0.right" timestamp="1645006105828">
+    <state width="1360" height="272" key="GridCell.Tab.1.bottom/57.27.1383.873@57.27.1383.873" timestamp="1653822237142" />
+    <state width="1360" height="272" key="GridCell.Tab.1.center" timestamp="1653822237142">
       <screen x="57" y="27" width="1383" height="873" />
     </state>
-    <state width="1360" height="272" key="GridCell.Tab.0.right/57.27.1383.873@57.27.1383.873" timestamp="1645006105828" />
-    <state width="1360" height="272" key="GridCell.Tab.1.bottom" timestamp="1645006105830">
+    <state width="1360" height="272" key="GridCell.Tab.1.center/57.27.1383.873@57.27.1383.873" timestamp="1653822237142" />
+    <state width="1360" height="272" key="GridCell.Tab.1.left" timestamp="1653822237141">
       <screen x="57" y="27" width="1383" height="873" />
     </state>
-    <state width="1360" height="272" key="GridCell.Tab.1.bottom/57.27.1383.873@57.27.1383.873" timestamp="1645006105830" />
-    <state width="1360" height="272" key="GridCell.Tab.1.center" timestamp="1645006105829">
+    <state width="1360" height="272" key="GridCell.Tab.1.left/57.27.1383.873@57.27.1383.873" timestamp="1653822237141" />
+    <state width="1360" height="272" key="GridCell.Tab.1.right" timestamp="1653822237142">
       <screen x="57" y="27" width="1383" height="873" />
     </state>
-    <state width="1360" height="272" key="GridCell.Tab.1.center/57.27.1383.873@57.27.1383.873" timestamp="1645006105829" />
-    <state width="1360" height="272" key="GridCell.Tab.1.left" timestamp="1645006105829">
+    <state width="1360" height="272" key="GridCell.Tab.1.right/57.27.1383.873@57.27.1383.873" timestamp="1653822237142" />
+    <state x="404" y="290" key="com.intellij.ide.util.TipDialog" timestamp="1653896285018">
       <screen x="57" y="27" width="1383" height="873" />
     </state>
-    <state width="1360" height="272" key="GridCell.Tab.1.left/57.27.1383.873@57.27.1383.873" timestamp="1645006105829" />
-    <state width="1360" height="272" key="GridCell.Tab.1.right" timestamp="1645006105830">
-      <screen x="57" y="27" width="1383" height="873" />
-    </state>
-    <state width="1360" height="272" key="GridCell.Tab.1.right/57.27.1383.873@57.27.1383.873" timestamp="1645006105830" />
-    <state x="404" y="290" key="com.intellij.ide.util.TipDialog" timestamp="1645034164217">
-      <screen x="57" y="27" width="1383" height="873" />
-    </state>
-    <state x="404" y="290" key="com.intellij.ide.util.TipDialog/57.27.1383.873@57.27.1383.873" timestamp="1645034164217" />
-    <state x="440" y="155" width="606" height="615" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1645029789327">
-      <screen x="57" y="27" width="1383" height="873" />
-    </state>
-    <state x="440" y="155" width="606" height="615" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/57.27.1383.873@57.27.1383.873" timestamp="1645029789327" />
-    <state x="317" y="161" width="863" height="602" key="find.popup" timestamp="1644846870371">
-      <screen x="57" y="27" width="1383" height="873" />
-    </state>
-    <state x="317" y="161" width="863" height="602" key="find.popup/57.27.1383.873@57.27.1383.873" timestamp="1644846870371" />
+    <state x="404" y="290" key="com.intellij.ide.util.TipDialog/57.27.1383.873@57.27.1383.873" timestamp="1653896285018" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/json_format_model.py</url>
+          <line>82</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

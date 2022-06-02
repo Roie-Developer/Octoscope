@@ -40,7 +40,6 @@ class Octobox:
         this.sniffer = Sniffer(this)
         this.synchroSniffer = SynchroSniffer(this)
         this.pal6Config = Pal6Config(this)
-        print(f'This is device: {this.device}')
 
     def sleep(this, ms):
         """ Utility function - Sleep

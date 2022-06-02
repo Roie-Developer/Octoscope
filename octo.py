@@ -48,6 +48,11 @@ def run_profile(profile_name, data, counter):
     start_time = time.strftime("%Y%m%d-%H%M%S")
     tt = {'name': profile_name, 'model': '', 'revision': ''}
     test_obj, read_response = octobox.throughputTest.read(tt)
+    # This try except block was added by Roie Turgeman
+    try:
+        SLEEP_COUNT = int(test_obj.get("computedDuration"))
+    except TypeError as e:
+        SLEEP_COUNT = 10
     if read_response is not None:
         raise ValueError(read_response[0]["message"])
     logging.debug("test_obj: {}".format(test_obj))
@@ -57,12 +62,11 @@ def run_profile(profile_name, data, counter):
             logging.debug("checking whether {} is still running".format(profile_name))
             if not octobox.throughputTest.isTestRunning(test_obj)[0]:
                 test_done = True
-                print('Out  of profile loop')
                 break
             # TODO: show progressbar according to testDuration? (is it the same as calculated duration?)
             # sys.stdout.write('In run_profile #1:\n . ')
             # sys.stdout.flush()
-            print(f"Entering sleeping count in run_profile for {SLEEP_COUNT}s")
+            print(f"Waiting for the test to finish, time needed {SLEEP_COUNT}s")
             time.sleep(SLEEP_COUNT)
         if test_done:
             logging.info("{} - finished".format(profile_name))
@@ -86,8 +90,12 @@ def run_profile(profile_name, data, counter):
 
 
 # Start - Added by Roie Turgeman
-def automation_parse(csv_path, json_path, user_csv_input_data, csv_row_counter):
-    json_controller.ParsingToJson(csv_path, json_path, user_csv_input_data, csv_row_counter)
+def automation_parse(csv_path, json_path, automation_data, row_counter):
+    print('Automation parse started')
+    start_timer = time.clock()
+    json_controller.ParsingToJson(csv_path, json_path, automation_data, row_counter, octobox)
+    end_timer = time.clock()
+    print(f"Automation test #{row_counter + 1} finished .\nPerformance time of automation build is:  {end_timer - start_timer}s")
 
 
 def run(profiles, repeat=1):
@@ -147,7 +155,7 @@ def main():
     run(profiles=args.profiles, repeat=int(args.repeat))
 
 
-def Pal24_Config(index, data):
+def Pal24_Config(index):
     UNSET = "UNSET"
     scriptName = __file__
     ip = UNSET
@@ -194,7 +202,7 @@ def Pal24_Config(index, data):
     checkResponse(myResponse)
 
 
-def Pal5_Config(index, data):
+def Pal5_Config(index):
     UNSET = "UNSET"
     scriptName = __file__
     ip = UNSET
@@ -297,4 +305,5 @@ def Pal6_Config(index, profile, data):
     time.sleep(100)
 
 
-if __name__ == "__main__": main()
+if __name__ == "__main__":
+    main()

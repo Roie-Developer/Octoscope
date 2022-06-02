@@ -20,7 +20,7 @@ class RequiredJsonFormat(object):
         # All objects that are added should be inside this object
         self.start_testResult_testCases_testParams = {"AP": {}, "test_type": "MAC_RVR"}
         self.start_testResult_testCases_testParams_AP = {"Direction": "NA", "Protocol": "NA", "Channel Mode": "NA",
-                                                         "Regulatory Domain": "NA",
+                                                         "Regulatory Domain": "NA", "Protocol": "NA", "Band": "NA", "Security":"NA",
                                                          "Mode": "NA", "Channel": "NA"}
         self.test_cases = None
         self.start["ID"] = datetime.datetime.now().strftime("%d%m%Y%H%M%S_Octoscope")
@@ -30,7 +30,7 @@ class RequiredJsonFormat(object):
         self.dict_format = dict()
 
     # Formatting the json according to UTAF specs
-    def format(self):
+    def format(self) -> dict:
         try:
             self.dict_format.update(self.start)
             lis = self.dict_format.get("test_results")
@@ -79,27 +79,27 @@ class RequiredJsonFormat(object):
         finally:
             self.test_cases.append(start_testResult_testCases_testSteps)
 
-    def add_dut_data_to_json(self, csv_data, config_csv_row_index_cnt):
+    def add_dut_data_to_json(self, csv_data, csv_row_index):
         try:
             #  Starting the parsing
             # Adding test name
-            self.dict_format["test_name"] = csv_data["TEST NAME"][config_csv_row_index_cnt]
+            self.dict_format["test_name"] = csv_data["TEST NAME"][csv_row_index]
             # Adding client as pal6
-            self.dict_format["wcs_sta1_info"] = csv_data["Client"][config_csv_row_index_cnt]
+            self.dict_format["wcs_sta1_info"] = csv_data["Client"][csv_row_index]
             # Adding channel
             self.dict_format["test_results"][0]['test_cases'][0]['test_params']['AP']['Channel'] = int(
-                csv_data["Channel"][config_csv_row_index_cnt])
+                csv_data["Channel"][csv_row_index])
             # adding channel mode = bandwidth
-            [bandwidth_value] = re.findall(r'\d+', csv_data["BANDWIDTH"][config_csv_row_index_cnt])
-            self.dict_format["test_results"][0]['test_cases'][0]['test_params']['AP']['Channel Mode'] = bandwidth_value
-            # Adding Channel mode = network mode
-
-
-            print(f'This is value: {bandwidth_value}')
-            self.dict_format["test_results"][0]['test_cases'][0]['test_params']['AP']['Mode'] = csv_data["WIFi_INTERFACE"][config_csv_row_index_cnt]
-
-            print(f' THis is the WIFI Interface: {csv_data["WIFi_INTERFACE"][config_csv_row_index_cnt]}')
+            [bandwidth_value] = re.findall(r'\d+', csv_data["BANDWIDTH"][csv_row_index])
+            self.dict_format["test_results"][0]['test_cases'][0]['test_params']['AP']['Channel Mode'] = bandwidth_value+"MHz"
+            # Adding Channel mode = network mode AX, AC etc
+            [channel_mode_reg] = re.findall(r'(?<=_)\w+',csv_data["WIFi_INTERFACE"][csv_row_index])
+            self.dict_format["test_results"][0]['test_cases'][0]['test_params']['AP']['Mode'] = channel_mode_reg
+            # Radio 2.5 and 5G adding
+            [radio_type_reg] = re.findall(r'(?<=_)\w+',csv_data["RADIO_TYPE"][csv_row_index])
+            self.dict_format["test_results"][0]['test_cases'][0]['test_params']['AP']['Band'] = radio_type_reg+"GHz"
+            # Security type WPA2 etc
+            [radio_type_reg] = re.findall(r'(?<=_)\w+', csv_data["Security"][csv_row_index])
+            self.dict_format["test_results"][0]['test_cases'][0]['test_params']['AP']['Security'] = radio_type_reg
         except Exception as e:
             print(e)
-        finally:
-            print("done")
