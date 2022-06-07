@@ -1,0 +1,9 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource>
+    <file>icons/Automation data icon.png</file>
+    <file>icons/Plot graph icon.png</file>
+    <file>icons/User input icon.png</file>
+    <file>icons/Log icon.png</file>
+    <file>icons/Play green icon.png</file>
+</qresource>
+</RCC>
