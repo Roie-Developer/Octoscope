@@ -5,5 +5,7 @@
     <file>icons/User input icon.png</file>
     <file>icons/Log icon.png</file>
     <file>icons/Play green icon.png</file>
+    <file>icons/Stop ball icon.png</file>
+    <file>icons/Move left icon.png</file>
 </qresource>
 </RCC>

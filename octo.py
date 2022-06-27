@@ -1,3 +1,5 @@
+# octo
+
 #!/usr/bin/env python3
 import os  # linux
 import sys
@@ -24,8 +26,9 @@ PROFILE_MAX_DURATION = 2 * 7000  # sec
 SLEEP_COUNT = 10
 
 created_csvs = []
-# Added by Roie Turgeman - next line
+# Added variables by Roie Turgeman -created_json, passing_data_from_gui
 created_json = set()
+passing_data_from_gui = dict()
 
 """ setup parameters """
 
@@ -35,7 +38,9 @@ PROFILES_BACKUP_PATH = "/home/octoscope/profiles/"
 
 def Configuration():
     xsl_name = "Octoscope_Configuration.xlsx"
-    df = pandas.read_excel(xsl_name)
+    # xsl_path was added by roie turjeman and replaced xsl_name
+    xsl_path = r"/home/octoscope/Octoscope_New/new edited octo api/Octoscope_Configuration.xlsx"
+    df = pandas.read_excel(xsl_path)
     return df
 
 
@@ -89,13 +94,21 @@ def run_profile(profile_name, data, counter):
     automation_parse(csv_path, json_path, data, counter)
 
 
-# Start - Added by Roie Turgeman
+# function automation_parse and passing was added by Roie Turgeman
 def automation_parse(csv_path, json_path, automation_data, row_counter):
     print('Automation parse started')
     start_timer = time.clock()
-    json_controller.ParsingToJson(csv_path, json_path, automation_data, row_counter, octobox)
+    json_controller.ParsingToJson(csv_path, json_path, automation_data, row_counter, octobox,passing_data_from_gui)
+    print ("THis is row index: ", row_counter)
+    print("THis is data index:", passing_data_from_gui["Restart PAL6"])
+    # row counter + 2 since 1 is for this iteration and 1 more is for the next iteration
+    if passing_data_from_gui["Restart PAL6"][0] == row_counter + 2:
+        print("restarting")
+        json_controller.ParsingToJson.restart_pal6(json_controller)
+        passing_data_from_gui["Restart PAL6"].pop(0)
     end_timer = time.clock()
     print(f"Automation test #{row_counter + 1} finished .\nPerformance time of automation build is:  {end_timer - start_timer}s")
+
 
 
 def run(profiles, repeat=1):
@@ -298,6 +311,7 @@ def Pal6_Config(index, profile, data):
     }
 
     # deleted, errors = octobox.pal6Config.remove(pal6)
+
     pal6, errors = octobox.pal6Config.updateByEP(pal6)
     print(errors)
     push, errors = octobox.pal6Config.pushOne(pal6)

@@ -84,6 +84,8 @@ class RequiredJsonFormat(object):
             #  Starting the parsing
             # Adding test name
             self.dict_format["test_name"] = csv_data["TEST NAME"][csv_row_index]
+            #Adding setup name as Octoscoe for all tests
+            self.start["DUT_platform"] = "Octoscope"
             # Adding client as pal6
             self.dict_format["wcs_sta1_info"] = csv_data["Client"][csv_row_index]
             # Adding channel
@@ -103,3 +105,7 @@ class RequiredJsonFormat(object):
             self.dict_format["test_results"][0]['test_cases'][0]['test_params']['AP']['Security'] = radio_type_reg
         except Exception as e:
             print(e)
+
+
+    def adding_GUI_data_to_json(self, gui_data:dict) -> None:
+        self.dict_format["DUT_Build_Version"] = "WLAN"+str(gui_data["build_version"])
