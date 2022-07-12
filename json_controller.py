@@ -27,7 +27,7 @@ class ParsingToJson(object):
         self.gui_data = passing_data_from_gui
         self.json_obj = self.build_json_format()
         self.add_test_data()
-        self.add_gui_test_data()
+        self.json_obj.adding_GUI_data_to_json(self.gui_data, csv_row_index)
         self.json_obj.add_dut_data_to_json(automation_csv_data, csv_row_index)
         # self.learning_octobox()
         ''' def automation_end_process() - argument index: (All options output A csv file)
@@ -99,9 +99,9 @@ class ParsingToJson(object):
                         found = True
             except Exception as e:
                 print(f'In  def add_test_data error occurred {e}')
-
-    def add_gui_test_data(self):
-        self.json_obj.adding_GUI_data_to_json(self.gui_data)
+                
+    # def add_gui_test_data(self):
+    #     self.json_obj.adding_GUI_data_to_json(self.gui_data)
 
 
 

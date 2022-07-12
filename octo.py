@@ -71,7 +71,7 @@ def run_profile(profile_name, data, counter):
             # TODO: show progressbar according to testDuration? (is it the same as calculated duration?)
             # sys.stdout.write('In run_profile #1:\n . ')
             # sys.stdout.flush()
-            print(f"Waiting for the test to finish, time needed {SLEEP_COUNT}s")
+            print(f"Test started - Waiting for the test to finish, time needed {SLEEP_COUNT}s")
             time.sleep(SLEEP_COUNT)
         if test_done:
             logging.info("{} - finished".format(profile_name))
@@ -99,13 +99,15 @@ def automation_parse(csv_path, json_path, automation_data, row_counter):
     print('Automation parse started')
     start_timer = time.clock()
     json_controller.ParsingToJson(csv_path, json_path, automation_data, row_counter, octobox,passing_data_from_gui)
-    print ("THis is row index: ", row_counter)
-    print("THis is data index:", passing_data_from_gui["Restart PAL6"])
     # row counter + 2 since 1 is for this iteration and 1 more is for the next iteration
-    if passing_data_from_gui["Restart PAL6"][0] == row_counter + 2:
-        print("restarting")
-        json_controller.ParsingToJson.restart_pal6(json_controller)
-        passing_data_from_gui["Restart PAL6"].pop(0)
+    # TODO - Must FIX restart 
+    # print ("THis is row index: ", row_counter)
+    # print("THis is restart index:", passing_data_from_gui["Restart PAL6"])
+    # print("THis is test index:", passing_data_from_gui["Restart PAL6"])
+    # if passing_data_from_gui["Restart PAL6"][0] == row_counter + 2:
+    #     print("restarting")
+    #     json_controller.ParsingToJson.restart_pal6(json_controller)
+    #     passing_data_from_gui["Restart PAL6"].pop(0)
     end_timer = time.clock()
     print(f"Automation test #{row_counter + 1} finished .\nPerformance time of automation build is:  {end_timer - start_timer}s")
 

@@ -18,7 +18,7 @@ class MainGui(QMainWindow, ui):
 
     def __init__(self):
         import octo
-        self.user_test_data = {"Restart PAL6": [], "load_test": False, "plot_chart": False, "tests_seq": ["",], "build_version": "NA","regulatory_domain" : "US" }
+        self.user_test_data = {"Restart PAL6": [], "load_test": False, "plot_chart": False, "tests_seq": ["First line is overlooked",], "build_version": "NA","regulatory_domain" : "US" ,"Submitter": ""}
         self.thread = TestThread(octo,self.user_test_data)
         QMainWindow.__init__(self)
         self.setupUi(self)
@@ -117,14 +117,17 @@ class MainGui(QMainWindow, ui):
                 4. Disable GUI 
                 5. Pass test cases 
         '''
+        cnt_profiles = len(list(filter(lambda st: st != "Restart PAL6", self.user_test_data["tests_seq"])))        
+        # If its not other vendor we need the the build version
         if self.platforn_combo_box.currentText() != "Other Vendor" :
             self.get_build_version() 
         if self.thread.isRunning() :
             print("Test is running")
-        elif self.test_execution_list.count() < 1 :
+        elif cnt_profiles <= 1 :
             print("Must select A test first")
         else:
             self.seperate_restart_pal6_from_test()
+            self.get_Submitter()
             self.thread.start()
 
 
@@ -150,8 +153,6 @@ class MainGui(QMainWindow, ui):
 
 
 
-
-
     #############################################
     ############# Handel Check Box ##############
     #############################################
@@ -172,6 +173,10 @@ class MainGui(QMainWindow, ui):
         if re.match(r"^(\d{1,2}\.){3}\d{1,2}$",txt) :
             self.user_test_data["build_version"] = txt
         # TODO - create Error class - raise BadVersionFormatError("Version format is not as expected!")
+
+    def get_Submitter(self):
+        self.user_test_data["Submitter"] = self.submitter_name_combo_box.currentText()
+
 
     def set_log_text(self, my_text: str) -> None:
         self.log_text_edit.append(my_text + "\n")

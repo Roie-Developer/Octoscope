@@ -3,16 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="b0c5bac1-3a7f-4ca3-a9a9-80fcb38aaa02" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.~lock.Octoscope_Configuration.xlsx#" beforeDir="false" afterPath="$PROJECT_DIR$/.~lock.Octoscope_Configuration.xlsx#" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.~lock.Octoscope_Configuration_temp.xlsx#" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/OctoGUI/icons.qrc" beforeDir="false" afterPath="$PROJECT_DIR$/OctoGUI/icons.qrc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OctoGUI/icons_rc.py" beforeDir="false" afterPath="$PROJECT_DIR$/OctoGUI/icons_rc.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OctoGUI/gui_test_thread.py" beforeDir="false" afterPath="$PROJECT_DIR$/OctoGUI/gui_test_thread.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OctoGUI/library.ui" beforeDir="false" afterPath="$PROJECT_DIR$/OctoGUI/library.ui" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OctoGUI/pyqt-view.py" beforeDir="false" afterPath="$PROJECT_DIR$/OctoGUI/pyqt-view.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Octoscope_Configuration.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Octoscope_Configuration.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Octoscope_Configuration_temp.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Octoscope_Configuration_temp.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PyQt5/pyqt-view.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/json_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/json_controller.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/json_format_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/json_format_model.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/octo.py" beforeDir="false" afterPath="$PROJECT_DIR$/octo.py" afterDir="false" />
@@ -135,18 +128,8 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/json_format_model.py</url>
-          <line>82</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/octo.py</url>
-          <line>312</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/OctoGUI/gui_test_thread.py</url>
-          <line>18</line>
-          <option name="timeStamp" value="7" />
+          <line>110</line>
+          <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

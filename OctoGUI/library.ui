@@ -99,7 +99,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -330,7 +330,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>Plots Tests</string>
+       <string>Plot Tests</string>
       </property>
      </widget>
      <widget class="QPushButton" name="stop_test_button">
@@ -418,12 +418,22 @@
       </item>
       <item>
        <property name="text">
-        <string>PAL6_DS_2.4</string>
+        <string>PAL6_Automation_UP_TCP</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>PAL6_Automation-1</string>
        </property>
       </item>
       <item>
        <property name="text">
         <string>PAL6_Automation</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>PAL6_DS_2.4</string>
        </property>
       </item>
       <item>

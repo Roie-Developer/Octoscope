@@ -11,7 +11,7 @@ class RequiredJsonFormat(object):
     def __init__(self, json_controller):
         self.json_controller = json_controller
         self.start = {"test_results": [], "wcs_sta1_info": "NA", "test_name": "MAC_RVR",
-                      "Setup_name": "Octoscope", "DUT_platform": "NA", "ID": "", "DUT_Build_Version": "NA",
+                      "Setup_name": "Octoscope","submitter": "NA", "DUT_platform": "NA", "ID": "", "DUT_Build_Version": "NA",
                       "test_type": "MAC_RVR"}
         self.start_testResult = {"test_cases": [], "test_comments": [], "test_type": "MAC_RVR"}
         # In log link need to provide full path to file
@@ -106,6 +106,35 @@ class RequiredJsonFormat(object):
         except Exception as e:
             print(e)
 
-
-    def adding_GUI_data_to_json(self, gui_data:dict) -> None:
+    def adding_GUI_data_to_json(self, gui_data:dict, csv_row_index: int) -> None:
         self.dict_format["DUT_Build_Version"] = "WLAN"+str(gui_data["build_version"])
+        test_name = gui_data["tests_seq"][csv_row_index+1]
+        self.dict_format["submitter"] = gui_data["Submitter"]
+        self.dict_format["test_results"][0]['test_cases'][0]['test_params']['AP']['Regulatory Domain'] = gui_data["regulatory_domain"]
+        parse = re.split("_",test_name)
+        for i in range(len(parse)):
+            if parse[i] == 'UP' or parse[i] == 'up':
+                self.dict_format["test_results"][0]['test_cases'][0]['test_params']['AP']['Direction'] = "Upstream"
+                continue
+            if parse[i] == 'Down' or parse[i] == 'down':
+                self.dict_format["test_results"][0]['test_cases'][0]['test_params']['AP']['Direction'] = "Downstream"
+                continue
+            if parse[i] == 'TCP' or parse[i] == 'tcp':
+                self.dict_format["test_results"][0]['test_cases'][0]['test_params']['AP']['Protocol'] = "TCP"
+                continue
+            if parse[i] == 'UDP' or parse[i] == 'udp':
+                self.dict_format["test_results"][0]['test_cases'][0]['test_params']['AP']['Protocol'] = "UDP"
+                continue
+
+
+
+
+
+
+
+
+
+
+
+
+
