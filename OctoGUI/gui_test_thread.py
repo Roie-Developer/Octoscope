@@ -1,7 +1,6 @@
 from PyQt5 import QtCore
 from PyQt5.QtCore import *
 
-
 class TestThread(QtCore.QThread, QObject):
 
     def __init__(self, octo, user_test_data):
@@ -20,8 +19,7 @@ class TestThread(QtCore.QThread, QObject):
             self.octo.main()
         else:
             print("Only restart for PAL6 is needed")
-   
-   
+
     def stop(self):
         self.terminate()
     

@@ -9,23 +9,20 @@ from PyQt5.uic import loadUiType
 import re
 from gui_test_thread import TestThread
 
-
 ui, _ = loadUiType('library.ui')
         
-
 class MainGui(QMainWindow, ui):
     # requestSignal_getinfo = QtCore.pyqtSignal() ???????
 
     def __init__(self):
         import octo
-        self.user_test_data = {"Restart PAL6": [], "load_test": False, "plot_chart": False, "tests_seq": ["First line is overlooked",], "build_version": "NA","regulatory_domain" : "US" ,"Submitter": ""}
+        self.user_test_data = {"Restart PAL6": [], "load_test": False, "plot_chart": False, "tests_seq": ["First line is overlooked",], "build_version": "NA","regulatory_domain" : "US" ,"Submitter": "","Platform":"NA"}
         self.thread = TestThread(octo,self.user_test_data)
         QMainWindow.__init__(self)
         self.setupUi(self)
         self.handel_UI_changes()
         self.set_text_edit_interactive(True)
         self.add_listeners()
-
 
     def handel_UI_changes(self):
         self.hide_user_input_widget()
@@ -65,6 +62,7 @@ class MainGui(QMainWindow, ui):
         self.add_test_to_excution_button.clicked.connect(self.add_test_profile)
         self.remove_selected_button.clicked.connect(self.delete_item_from_execution_list)
         self.remove_all_button.clicked.connect(self.clear_execution_list)
+        self.new_submitter_line_edit.textChanged.connect(self.new_submitter_name)
 
     #############################################
     ############## Open Frame Tab ###############
@@ -96,9 +94,12 @@ class MainGui(QMainWindow, ui):
     def on_change_submitter_name(self):
         txt = self.submitter_name_combo_box.currentText()
         if txt == "New":
+            self.new_submitter_line_edit.setReadOnly(False)
             self.show_submitter_name_widget()
         else:
+            self.new_submitter_line_edit.setReadOnly(True)
             self.hide_submitter_name_widget()
+            self.user_test_data["Submitter"] = txt
 
     def on_changeregulatory_domain(self):
         self.user_test_data["regulatory_domain"] = self.regulatory_domain_combo_box.currentText()
@@ -106,7 +107,6 @@ class MainGui(QMainWindow, ui):
     #############################################
     ############## Test Execution ###############
     #############################################
-
 
     def start_test(self):
         ''' 
@@ -120,7 +120,11 @@ class MainGui(QMainWindow, ui):
         cnt_profiles = len(list(filter(lambda st: st != "Restart PAL6", self.user_test_data["tests_seq"])))        
         # If its not other vendor we need the the build version
         if self.platforn_combo_box.currentText() != "Other Vendor" :
-            self.get_build_version() 
+            self.get_build_version()
+        if  len(self.user_test_data["Submitter"]) <= 4 :
+            print(f'This is submitter: {self.user_test_data["Submitter"]}')
+            print("Must submit a name full name")
+            return 
         if self.thread.isRunning() :
             print("Test is running")
         elif cnt_profiles <= 1 :
@@ -128,8 +132,8 @@ class MainGui(QMainWindow, ui):
         else:
             self.seperate_restart_pal6_from_test()
             self.get_Submitter()
+            self.get_platform()
             self.thread.start()
-
 
     def stop_test(self):
         if self.thread.isRunning():
@@ -151,8 +155,6 @@ class MainGui(QMainWindow, ui):
             self.user_test_data["tests_seq"].pop(x)
         self.user_test_data["Restart PAL6"] = items
 
-
-
     #############################################
     ############# Handel Check Box ##############
     #############################################
@@ -167,7 +169,6 @@ class MainGui(QMainWindow, ui):
     ############# Handel GUI Data ###############
     #############################################
 
-
     def get_build_version(self):
         txt = self.wlan_build_version_line_edit.text()
         if re.match(r"^(\d{1,2}\.){3}\d{1,2}$",txt) :
@@ -175,12 +176,15 @@ class MainGui(QMainWindow, ui):
         # TODO - create Error class - raise BadVersionFormatError("Version format is not as expected!")
 
     def get_Submitter(self):
-        self.user_test_data["Submitter"] = self.submitter_name_combo_box.currentText()
-
+        submitter = self.submitter_name_combo_box.currentText()
+        if submitter == "New":
+            self.user_test_data["Submitter"] = self.submitter_name_combo_box.currentText()
+        
+    def get_platform(self):
+        self.user_test_data["Platform"] = self.platforn_combo_box.currentText()
 
     def set_log_text(self, my_text: str) -> None:
         self.log_text_edit.append(my_text + "\n")
-
 
     def add_test_profile(self):
         txt = self.test_option_list.selectedItems()[0].text()
@@ -197,7 +201,8 @@ class MainGui(QMainWindow, ui):
     def clear_execution_list(self):
         self.test_execution_list.clear()
 
-
+    def new_submitter_name(self):
+        self.user_test_data["Submitter"] = self.new_submitter_line_edit.text()
 
 def main():
     app = QApplication(sys.argv)
@@ -205,7 +210,6 @@ def main():
     window = MainGui()
     window.show()
     app.exec_()
-
 
 if __name__ == "__main__":
     # os.system(f"pyrcc5 icons.qrc -o icons_rc.py")

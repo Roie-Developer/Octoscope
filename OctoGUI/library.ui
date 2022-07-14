@@ -222,7 +222,7 @@
        </property>
        <item>
         <property name="text">
-         <string>US</string>
+         <string>UNITEDSTATES</string>
         </property>
        </item>
        <item>
@@ -260,7 +260,7 @@
      </widget>
      <widget class="QWidget" name="submitter_name_widget" native="true">
       <property name="enabled">
-       <bool>false</bool>
+       <bool>true</bool>
       </property>
       <property name="geometry">
        <rect>
@@ -270,7 +270,10 @@
         <height>31</height>
        </rect>
       </property>
-      <widget class="QLineEdit" name="lineEdit_3">
+      <widget class="QLineEdit" name="new_submitter_line_edit">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
        <property name="geometry">
         <rect>
          <x>0</x>
@@ -278,6 +281,9 @@
          <width>151</width>
          <height>25</height>
         </rect>
+       </property>
+       <property name="readOnly">
+        <bool>false</bool>
        </property>
        <property name="placeholderText">
         <string>Name</string>
@@ -318,6 +324,9 @@
       </property>
       <property name="text">
        <string>Load Tests</string>
+      </property>
+      <property name="checked">
+       <bool>true</bool>
       </property>
      </widget>
      <widget class="QCheckBox" name="plot_test_check_box">
@@ -413,27 +422,12 @@
       </property>
       <item>
        <property name="text">
-        <string>PAL6_Automation-2</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
         <string>PAL6_Automation_UP_TCP</string>
        </property>
       </item>
       <item>
        <property name="text">
-        <string>PAL6_Automation-1</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>PAL6_Automation</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>PAL6_DS_2.4</string>
+        <string>Automation_Full_UP_DS_5G</string>
        </property>
       </item>
       <item>
