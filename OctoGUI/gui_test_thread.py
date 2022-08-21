@@ -26,12 +26,12 @@ class TestThread(QtCore.QThread, QObject):
     def pal6_begins_with_restart(self):
          # User started execution list with restarting PAL 6
         try:
-            for i in range(len(self.user_test_data["Restart PAL6"])):
-                if self.user_test_data["Restart PAL6"][0] == 1:
-                    self.user_test_data["Restart PAL6"].pop(0)
+            for i in range(len(self.user_test_data["Restart_PAL6"])):
+                if self.user_test_data["Restart_PAL6"][0] == 1:
+                    self.user_test_data["Restart_PAL6"].pop(0)
                     self.octo.json_controller.ParsingToJson.restart_pal6(self)
-                    for i in range(len(self.user_test_data["Restart PAL6"])):
-                        self.user_test_data["Restart PAL6"][i] -= 1 
+                    for i in range(len(self.user_test_data["Restart_PAL6"])):
+                        self.user_test_data["Restart_PAL6"][i] -= 1 
                 else:
                     break
         except IndexError as e:

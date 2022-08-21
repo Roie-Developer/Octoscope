@@ -1,3 +1,4 @@
+import re
 import time
 from PyQt5 import QtCore
 from PyQt5.QtCore import *
@@ -6,17 +7,16 @@ from PyQt5.QtWidgets import *
 import sys, os
 sys.path.insert(1,"/home/octoscope/Octoscope_New/new edited octo api/")
 from PyQt5.uic import loadUiType
-import re
+from PlotGraphs.start_graph import Canvas
 from gui_test_thread import TestThread
 
 ui, _ = loadUiType('library.ui')
         
 class MainGui(QMainWindow, ui):
-    # requestSignal_getinfo = QtCore.pyqtSignal() ???????
 
     def __init__(self):
         import octo
-        self.user_test_data = {"Restart PAL6": [], "load_test": False, "plot_chart": False, "tests_seq": ["First line is overlooked",], "build_version": "NA","regulatory_domain" : "US" ,"Submitter": "","Platform":"NA"}
+        self.user_test_data = {"Restart_PAL6": list(), "load_test": True, "plot_chart": False, "tests_seq": ["First line is overlooked",], "build_version": "NA","regulatory_domain" : "US" ,"Submitter": "","Platform":"NA"}
         self.thread = TestThread(octo,self.user_test_data)
         QMainWindow.__init__(self)
         self.setupUi(self)
@@ -63,6 +63,8 @@ class MainGui(QMainWindow, ui):
         self.remove_selected_button.clicked.connect(self.delete_item_from_execution_list)
         self.remove_all_button.clicked.connect(self.clear_execution_list)
         self.new_submitter_line_edit.textChanged.connect(self.new_submitter_name)
+        self.plot_test_check_box.stateChanged.connect(self.append_grapgh)
+    
 
     #############################################
     ############## Open Frame Tab ###############
@@ -117,12 +119,12 @@ class MainGui(QMainWindow, ui):
                 4. Disable GUI 
                 5. Pass test cases 
         '''
-        cnt_profiles = len(list(filter(lambda st: st != "Restart PAL6", self.user_test_data["tests_seq"])))        
+        cnt_profiles = len(list(filter(lambda st: st != "Restart_PAL6", self.user_test_data["tests_seq"])))        
         # If its not other vendor we need the the build version
         if self.platforn_combo_box.currentText() != "Other Vendor" :
             self.get_build_version()
         if  len(self.user_test_data["Submitter"]) <= 4 :
-            print(f'This is submitter: {self.user_test_data["Submitter"]}')
+            print(f'This is not A valid name: {self.user_test_data["Submitter"]}')
             print("Must submit a name full name")
             return 
         if self.thread.isRunning() :
@@ -133,12 +135,13 @@ class MainGui(QMainWindow, ui):
             self.seperate_restart_pal6_from_test()
             self.get_Submitter()
             self.get_platform()
+            self.on_changeregulatory_domain()
             self.thread.start()
 
     def stop_test(self):
         if self.thread.isRunning():
             self.thread.stop()
-            self.user_test_data = {"Restart PAL6": [], "load_test": False, "plot_chart": False, "tests_seq": [], "build_version": "NA","regulatory_domain" : "US" }
+            self.user_test_data = {"Restart_PAL6": [], "load_test": False, "plot_chart": False, "tests_seq": [], "build_version": "NA","regulatory_domain" : "US" }
             time.sleep(1)
             import octo
             print(f"Test was stopped, isRunning = {self.thread.isRunning()}")
@@ -149,11 +152,11 @@ class MainGui(QMainWindow, ui):
     def seperate_restart_pal6_from_test(self):
         items = list()
         for i in range(len(self.user_test_data["tests_seq"])):
-            if self.user_test_data["tests_seq"][i] ==  "Restart PAL6":
+            if self.user_test_data["tests_seq"][i] ==  "Restart_PAL6":
                 items.append(i)
         for x in items[::-1]:
             self.user_test_data["tests_seq"].pop(x)
-        self.user_test_data["Restart PAL6"] = items
+        self.user_test_data["Restart_PAL6"] = items
 
     #############################################
     ############# Handel Check Box ##############
@@ -161,6 +164,7 @@ class MainGui(QMainWindow, ui):
 
     def upload_test(self):
         self.user_test_data["load_test"] = self.load_test_check_box.isChecked()
+        print(f'Test ulpoad to data base status is {self.load_test_check_box.isChecked()}')
 
     def plot_test(self):
         self.user_test_data["plot_chart"] = self.plot_test_check_box.isChecked()
@@ -203,6 +207,17 @@ class MainGui(QMainWindow, ui):
 
     def new_submitter_name(self):
         self.user_test_data["Submitter"] = self.new_submitter_line_edit.text()
+
+    #############################################
+    ############### plot graph ##################
+    #############################################
+
+    def append_grapgh(self):
+        chart = Canvas(self)
+        
+
+
+
 
 def main():
     app = QApplication(sys.argv)
