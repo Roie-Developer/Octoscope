@@ -29,5 +29,3 @@ class Canvas(FigureCanvas):
 # demo.show()
 # sys.exit(app.exec_())
 
-
-

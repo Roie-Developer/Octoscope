@@ -27,7 +27,7 @@
      <string>Plot Chart</string>
     </property>
     <property name="icon">
-     <iconset resource="icons.qrc">
+     <iconset resource="../../new edited octo api/OctoGUI/icons.qrc">
       <normaloff>:/icons/Plot graph icon.png</normaloff>:/icons/Plot graph icon.png</iconset>
     </property>
     <property name="iconSize">
@@ -53,7 +53,7 @@
      <string>*User Data</string>
     </property>
     <property name="icon">
-     <iconset resource="icons.qrc">
+     <iconset resource="../../new edited octo api/OctoGUI/icons.qrc">
       <normaloff>:/icons/User input icon.png</normaloff>:/icons/User input icon.png</iconset>
     </property>
     <property name="iconSize">
@@ -73,10 +73,10 @@
      </rect>
     </property>
     <property name="text">
-     <string>Test Data</string>
+     <string>Data Handler</string>
     </property>
     <property name="icon">
-     <iconset resource="icons.qrc">
+     <iconset resource="../../new edited octo api/OctoGUI/icons.qrc">
       <normaloff>:/icons/Automation data icon.png</normaloff>:/icons/Automation data icon.png</iconset>
     </property>
     <property name="iconSize">
@@ -99,7 +99,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -303,7 +303,7 @@
        <string>   Start Test</string>
       </property>
       <property name="icon">
-       <iconset resource="icons.qrc">
+       <iconset resource="../../new edited octo api/OctoGUI/icons.qrc">
         <normaloff>:/icons/Play green icon.png</normaloff>:/icons/Play green icon.png</iconset>
       </property>
       <property name="iconSize">
@@ -355,7 +355,7 @@
        <string>   Stop Test</string>
       </property>
       <property name="icon">
-       <iconset resource="icons.qrc">
+       <iconset resource="../../new edited octo api/OctoGUI/icons.qrc">
         <normaloff>:/icons/Stop ball icon.png</normaloff>:/icons/Stop ball icon.png</iconset>
       </property>
       <property name="iconSize">
@@ -414,44 +414,19 @@
      <widget class="QListWidget" name="test_option_list">
       <property name="geometry">
        <rect>
-        <x>380</x>
+        <x>360</x>
         <y>70</y>
-        <width>251</width>
+        <width>271</width>
         <height>351</height>
        </rect>
       </property>
-      <item>
-       <property name="text">
-        <string>Restart_PAL6</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>PAL6_Automation_US_TCP_2.4G</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>PAL6_Automation_US_TCP_5G</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>PAL6_Automation_DS_TCP_5G</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>PAL6_Automation_US_TCP_2.4G</string>
-       </property>
-      </item>
      </widget>
      <widget class="QPushButton" name="add_test_to_excution_button">
       <property name="geometry">
        <rect>
         <x>270</x>
         <y>210</y>
-        <width>101</width>
+        <width>81</width>
         <height>51</height>
        </rect>
       </property>
@@ -462,7 +437,7 @@
        <string/>
       </property>
       <property name="icon">
-       <iconset resource="icons.qrc">
+       <iconset resource="../../new edited octo api/OctoGUI/icons.qrc">
         <normaloff>:/icons/Move left icon.png</normaloff>:/icons/Move left icon.png</iconset>
       </property>
       <property name="iconSize">
@@ -475,7 +450,7 @@
      <widget class="QPushButton" name="remove_all_button">
       <property name="geometry">
        <rect>
-        <x>10</x>
+        <x>160</x>
         <y>470</y>
         <width>89</width>
         <height>25</height>
@@ -489,7 +464,7 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>430</y>
+        <y>470</y>
         <width>131</width>
         <height>25</height>
        </rect>
@@ -498,17 +473,56 @@
        <string>Remove Selected</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton">
+     <widget class="QPushButton" name="open_csv_config_folder_button">
       <property name="geometry">
        <rect>
-        <x>380</x>
+        <x>360</x>
         <y>430</y>
-        <width>251</width>
+        <width>261</width>
         <height>25</height>
        </rect>
       </property>
       <property name="text">
-       <string>Open PAL csv config</string>
+       <string>Open CSV folder</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="refresh_test_list_button">
+      <property name="geometry">
+       <rect>
+        <x>360</x>
+        <y>470</y>
+        <width>261</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Refresh List</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="load_from_file_button">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>430</y>
+        <width>131</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Load Saved File</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="save_test_to_file_button">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>430</y>
+        <width>91</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Save List</string>
       </property>
      </widget>
     </widget>
@@ -544,7 +558,7 @@
      <string>Test Log</string>
     </property>
     <property name="icon">
-     <iconset resource="icons.qrc">
+     <iconset resource="../../new edited octo api/OctoGUI/icons.qrc">
       <normaloff>:/icons/Log icon.png</normaloff>:/icons/Log icon.png</iconset>
     </property>
     <property name="iconSize">
@@ -574,7 +588,7 @@
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources>
-  <include location="icons.qrc"/>
+  <include location="../../new edited octo api/OctoGUI/icons.qrc"/>
  </resources>
  <connections/>
 </ui>

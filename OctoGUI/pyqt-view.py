@@ -4,18 +4,18 @@ from PyQt5 import QtCore
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
-import sys, os
-sys.path.insert(1,"/home/octoscope/Octoscope_New/new edited octo api/")
+import sys
+sys.path.insert(1,"/home/octoscope/Octoscope_New/newEditedOctoApi/")
 from PyQt5.uic import loadUiType
 from PlotGraphs.start_graph import Canvas
 from gui_test_thread import TestThread
+import octo
 
 ui, _ = loadUiType('library.ui')
         
 class MainGui(QMainWindow, ui):
 
     def __init__(self):
-        import octo
         self.user_test_data = {"Restart_PAL6": list(), "load_test": True, "plot_chart": False, "tests_seq": ["First line is overlooked",], "build_version": "NA","regulatory_domain" : "US" ,"Submitter": "","Platform":"NA"}
         self.thread = TestThread(octo,self.user_test_data)
         QMainWindow.__init__(self)
@@ -23,6 +23,7 @@ class MainGui(QMainWindow, ui):
         self.handel_UI_changes()
         self.set_text_edit_interactive(True)
         self.add_listeners()
+        self.add_test_names()
 
     def handel_UI_changes(self):
         self.hide_user_input_widget()
@@ -47,24 +48,35 @@ class MainGui(QMainWindow, ui):
     def set_text_edit_interactive(self, value: bool):
         self.log_text_edit.setReadOnly(value)
 
+    # function became too long - so i splited it to two functions
     def add_listeners(self):
+        self.button_listeners()
+        self.other_listeners()
+
+    def other_listeners(self):
+        self.platforn_combo_box.currentTextChanged.connect(self.on_change_platforn)
+        self.submitter_name_combo_box.currentTextChanged.connect(self.on_change_submitter_name)
+        self.load_test_check_box.stateChanged.connect(self.upload_test)
+        self.plot_test_check_box.stateChanged.connect(self.plot_test)
+        self.regulatory_domain_combo_box.currentTextChanged.connect(self.on_change_regulatory_domain)
+        self.add_test_to_excution_button.clicked.connect(self.add_test_profile)
+        self.new_submitter_line_edit.textChanged.connect(self.new_submitter_name)
+        self.plot_test_check_box.stateChanged.connect(self.append_grapgh)
+
+    def button_listeners(self):
         self.plot_chart_button.clicked.connect(self.select_plot_chart_tab)
         self.test_data_button.clicked.connect(self.select_test_data_tab)
         self.user_data_show_button.clicked.connect(self.select_user_data_tab)
         self.test_log_button.clicked.connect(self.select_log_tab)
-        self.platforn_combo_box.currentTextChanged.connect(self.on_change_platforn)
-        self.submitter_name_combo_box.currentTextChanged.connect(self.on_change_submitter_name)
         self.start_test_button.clicked.connect(self.start_test)
         self.stop_test_button.clicked.connect(self.stop_test)
-        self.load_test_check_box.stateChanged.connect(self.upload_test)
-        self.plot_test_check_box.stateChanged.connect(self.plot_test)
-        self.regulatory_domain_combo_box.currentTextChanged.connect(self.on_changeregulatory_domain)
-        self.add_test_to_excution_button.clicked.connect(self.add_test_profile)
         self.remove_selected_button.clicked.connect(self.delete_item_from_execution_list)
         self.remove_all_button.clicked.connect(self.clear_execution_list)
-        self.new_submitter_line_edit.textChanged.connect(self.new_submitter_name)
-        self.plot_test_check_box.stateChanged.connect(self.append_grapgh)
-    
+        self.refresh_test_list_button.clicked.connect(self.add_test_names)
+        self.open_csv_config_folder_button.clicked.connect(self.open_csv_config_folder)
+        self.load_from_file_button.clicked.connect(self.load_from_file)
+        self.save_test_to_file_button.clicked.connect(self.save_test_to_file)
+
 
     #############################################
     ############## Open Frame Tab ###############
@@ -103,7 +115,7 @@ class MainGui(QMainWindow, ui):
             self.hide_submitter_name_widget()
             self.user_test_data["Submitter"] = txt
 
-    def on_changeregulatory_domain(self):
+    def on_change_regulatory_domain(self):
         self.user_test_data["regulatory_domain"] = self.regulatory_domain_combo_box.currentText()
 
     #############################################
@@ -132,10 +144,11 @@ class MainGui(QMainWindow, ui):
         elif cnt_profiles <= 1 :
             print("Must select A test first")
         else:
+            print(f"This is cnt profiles: {cnt_profiles}")
             self.seperate_restart_pal6_from_test()
             self.get_Submitter()
             self.get_platform()
-            self.on_changeregulatory_domain()
+            self.on_change_regulatory_domain()
             self.thread.start()
 
     def stop_test(self):
@@ -173,9 +186,19 @@ class MainGui(QMainWindow, ui):
     ############# Handel GUI Data ###############
     #############################################
 
+    def add_test_names(self)->None:
+        test_names = octo.get_test_names()
+        self.test_option_list.clear()
+        self.test_option_list.addItems(test_names)
+
+    def open_csv_config_folder(self):
+        import os
+        csv_file_path = "nautilus /home/octoscope/Octoscope_New/newEditedOctoApi"
+        os.system(csv_file_path)
+
     def get_build_version(self):
         txt = self.wlan_build_version_line_edit.text()
-        if re.match(r"^(\d{1,2}\.){3}\d{1,2}$",txt) :
+        if re.match(r"^(\d{1,2}\.){3}\d{1,2}$",txt):
             self.user_test_data["build_version"] = txt
         # TODO - create Error class - raise BadVersionFormatError("Version format is not as expected!")
 
@@ -192,7 +215,7 @@ class MainGui(QMainWindow, ui):
 
     def add_test_profile(self):
         txt = self.test_option_list.selectedItems()[0].text()
-        self.user_test_data["tests_seq"].append(txt)
+        # self.user_test_data["tests_seq"].append(txt)
         self.test_execution_list.addItem(txt)
 
     def delete_item_from_execution_list(self):
@@ -209,15 +232,23 @@ class MainGui(QMainWindow, ui):
         self.user_test_data["Submitter"] = self.new_submitter_line_edit.text()
 
     #############################################
+    ########### Handel GUI Buttons ##############
+    #############################################
+
+    def load_from_file(self):
+        print('File was open')
+
+    def save_test_to_file(self):
+        if len(self.user_test_data["tests_seq"]) > 0:
+            print(f'File was saved - This is data: {self.test_execution_list}')
+
+
+    #############################################
     ############### plot graph ##################
     #############################################
 
     def append_grapgh(self):
         chart = Canvas(self)
-        
-
-
-
 
 def main():
     app = QApplication(sys.argv)
