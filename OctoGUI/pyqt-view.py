@@ -131,8 +131,8 @@ class MainGui(QMainWindow, ui):
                 4. Disable GUI 
                 5. Pass test cases 
         '''
-        cnt_profiles = len(list(filter(lambda st: st != "Restart_PAL6", self.user_test_data["tests_seq"])))        
-        # If its not other vendor we need the the build version
+        my_list = self.change_QList_to_List()
+        cnt_profiles_without_restart = len(list(filter(lambda st: st != "Restart_PAL6", my_list)))        
         if self.platforn_combo_box.currentText() != "Other Vendor" :
             self.get_build_version()
         if  len(self.user_test_data["Submitter"]) <= 4 :
@@ -141,11 +141,10 @@ class MainGui(QMainWindow, ui):
             return 
         if self.thread.isRunning() :
             print("Test is running")
-        elif cnt_profiles <= 1 :
-            print("Must select A test first")
+        elif cnt_profiles_without_restart <= 0 :
+            print(f"Must select A test first, profiles count: {cnt_profiles_without_restart}")
         else:
-            print(f"This is cnt profiles: {cnt_profiles}")
-            self.seperate_restart_pal6_from_test()
+            self.seperate_restart_pal6_from_test(my_list)
             self.get_Submitter()
             self.get_platform()
             self.on_change_regulatory_domain()
@@ -162,14 +161,12 @@ class MainGui(QMainWindow, ui):
         else:
             print(f"No test is running,  isRunning = {self.thread.isRunning()}")
 
-    def seperate_restart_pal6_from_test(self):
-        items = list()
-        for i in range(len(self.user_test_data["tests_seq"])):
-            if self.user_test_data["tests_seq"][i] ==  "Restart_PAL6":
-                items.append(i)
-        for x in items[::-1]:
-            self.user_test_data["tests_seq"].pop(x)
-        self.user_test_data["Restart_PAL6"] = items
+    def seperate_restart_pal6_from_test(self,profiles_list):
+        for i in range(len(profiles_list)):
+            if profiles_list[i] ==  "Restart_PAL6":
+                self.user_test_data["Restart_PAL6"].append(i)
+            else:
+                self.user_test_data["tests_seq"].append(profiles_list[i])
 
     #############################################
     ############# Handel Check Box ##############
@@ -186,9 +183,16 @@ class MainGui(QMainWindow, ui):
     ############# Handel GUI Data ###############
     #############################################
 
+    def change_QList_to_List(self)->list:
+        my_list = list()
+        for i in range(self.test_execution_list.count()):
+            my_list.append(self.test_execution_list.item(i).text())
+        return my_list
+
     def add_test_names(self)->None:
         test_names = octo.get_test_names()
         self.test_option_list.clear()
+        self.test_option_list.addItem("Restart_PAL6")
         self.test_option_list.addItems(test_names)
 
     def open_csv_config_folder(self):
@@ -215,7 +219,6 @@ class MainGui(QMainWindow, ui):
 
     def add_test_profile(self):
         txt = self.test_option_list.selectedItems()[0].text()
-        # self.user_test_data["tests_seq"].append(txt)
         self.test_execution_list.addItem(txt)
 
     def delete_item_from_execution_list(self):
